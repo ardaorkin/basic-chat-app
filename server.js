@@ -4,6 +4,7 @@ var app = express()
 var http = require('http').Server(app)
 var io = require('socket.io')(http)
 var mongoose = require('mongoose')
+require('dotenv').config()
 
 app.use(express.static(__dirname))
 app.use(bodyParser.json())
@@ -11,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 mongoose.Promise = Promise
 
-var dbUrl = "mongodb+srv://nodeuser:115599@cluster0.v6dul.mongodb.net/learning-node?retryWrites=true&w=majority"
+var dbUrl = process.env.MONGO_DB_URI
 
 var Message = mongoose.model("Message", {
     name: String,
